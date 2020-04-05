@@ -1,5 +1,6 @@
 import {
-  extend
+  extend,
+  override
 } from 'flarum/extend';
 import app from 'flarum/app';
 import CommentPost from 'flarum/components/CommentPost';
@@ -29,6 +30,27 @@ app.initializers.add('the-turk-mathren', () => {
     });
   });
 
+  override(s9e.TextFormatter, 'preview', (original, text, element) => {
+    original(text, element);
+
+    // run KaTeX renderer on the single post body
+    // more information on https://katex.org/docs/autorender.html
+    renderMathInElement(element, {
+      "ignoredTags": app.forum.attribute('mathRenIgnoredTags'),
+      "ignoredClasses": app.forum.attribute('mathRenIgnoredClasses'),
+      "fleqn": app.forum.attribute('mathRenEnableFleqn'),
+      "leqno": app.forum.attribute('mathRenEnableLeqno'),
+      "output": app.forum.attribute('mathRenOutputMode'),
+      "throwOnError": app.forum.attribute('mathRenEnableThrowOnError'),
+      "errorColor": app.forum.attribute('mathRenErrorColor'),
+      "minRuleThickness": app.forum.attribute('mathRenMinRuleThickness'),
+      "maxSize": app.forum.attribute('mathRenMaxSize'),
+      "maxExpand": app.forum.attribute('mathRenMaxExpand'),
+      "macros": JSON.parse(app.forum.attribute('mathRenMacros')),
+      "delimiters": app.forum.attribute('mathRenDelimiters'),
+      "colorIsTextColor": app.forum.attribute('mathRenEnableColorIsTextColor')
+    });
+  });
 
   // add text editor buttons
   extend(TextEditor.prototype, 'toolbarItems', function(items) {
