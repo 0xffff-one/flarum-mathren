@@ -4,7 +4,7 @@ import {
 } from 'flarum/extend';
 import app from 'flarum/app';
 import CommentPost from 'flarum/components/CommentPost';
-import renderMathInElement from '../../dist/auto-render.min';
+// import renderMathInElement from '../../dist/auto-render.min';
 import TextEditor from 'flarum/components/TextEditor';
 import MathDropdown from './components/MathDropdown';
 

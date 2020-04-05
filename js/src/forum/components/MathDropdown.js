@@ -3,9 +3,8 @@ import Component from 'flarum/Component';
 import Dropdown from 'flarum/components/Dropdown';
 import Button from 'flarum/components/Button';
 import ItemList from 'flarum/utils/ItemList';
-import Separator from 'flarum/components/Separator';
 import icon from 'flarum/helpers/icon';
-import Alert from 'flarum/components/Alert';
+import apply from '../util/apply';
 
 export default class extends Component {
   init() {
@@ -45,10 +44,11 @@ export default class extends Component {
           // closing tag (right delimiter)
           const rightDelim = this.mainBlockDelimiter['right'];
 
-          var wrapper = this.wrapSelection(leftDelim, rightDelim);
-
-          this.textEditor.setValue(wrapper.value);
-          this.textEditor.setSelectionRange(wrapper.range);
+          apply(this.textEditor, {
+            prefix: leftDelim,
+            suffix: rightDelim,
+            multiline: true,
+          });
         },
       }),
       50
@@ -63,38 +63,16 @@ export default class extends Component {
           // closing tag (right delimiter)
           const rightDelim = this.mainInlineDelimiter['right'];
 
-          var wrapper = this.wrapSelection(leftDelim, rightDelim);
-
-          this.textEditor.setValue(wrapper.value);
-          this.textEditor.setSelectionRange(wrapper.range);
+          apply(this.textEditor, {
+            prefix: leftDelim,
+            suffix: rightDelim,
+            multiline: true,
+          });
         },
       }),
       0
     );
 
     return items;
-  }
-
-  /**
-   * Wrap the current selection with BBCode tags
-   * If there's no selection, put them around the cursor
-   * Adapted from flagrow/fonts extension
-   *
-   * @param string leftDelim
-   * @param string rightDelim
-   * @return object
-   */
-  wrapSelection(leftDelim, rightDelim) {
-    const range = this.textEditor.getSelectionRange();
-    const value = this.textEditor.value();
-
-    const before = value.slice(0, range[0]);
-    const after = value.slice(range[1]);
-    const selected = value.slice(range[0], range[1]);
-
-    return {
-      value: before + leftDelim + selected + rightDelim + after,
-      range: before.length + leftDelim.length + before.length + rightDelim.length + selected.length
-    }
   }
 }

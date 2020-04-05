@@ -69,12 +69,12 @@ class ConfigureTextFormatter
                     '['.$newTag.'={CHOICE='.$decisiveKeywords.';optional}]{TEXT}'.$d['right'],
                     '<span>
                         <xsl:choose>
-                         <xsl:when test="@'.$newTag.'">
-                          <xsl:attribute name="class">'.$classes[$display].' '.$classes['ignore'].'</xsl:attribute>
-                         </xsl:when>
-                         <xsl:otherwise>
-                          <xsl:attribute name="class">'.$classes[$display].'</xsl:attribute>
-                         </xsl:otherwise>
+                            <xsl:when test="@'.$newTag.'">
+                        <xsl:attribute name="class">'.$classes[$display].' '.$classes['ignore'].'</xsl:attribute>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:attribute name="class">'.$classes[$display].'</xsl:attribute>
+                        </xsl:otherwise>
                         </xsl:choose>
                         '.$d['left'].'<xsl:apply-templates/>'.$d['right'].'
                     </span>'
