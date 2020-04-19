@@ -42,7 +42,8 @@ class AddAssets
     private function assets(Document &$document)
     {
         // include KaTeX stylesheet
-        $document->head[] = '<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" as="style" integrity="sha256-V8SV2MO1FUb63Bwht5Wx9x6PVHNa02gv8BgH/uH3ung=" onload="this.onload=null;this.rel=\'stylesheet\'" crossorigin="anonymous">';
+        $document->head[] = '<link rel="preload" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" as="style" crossorigin="anonymous">';
+        $document->head[] = '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" crossorigin="anonymous">';
         $document->head[] = '<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha256-F/Xda58SPdcUCr+xhSGz9MA2zQBPb0ASEYKohl8UCHc=" crossorigin="anonymous"></script>';
         $document->head[] = '<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha256-90d2pnfw0r4K8CZAWPko4rpFXQsZvJhTBGYNkipDprI=" crossorigin="anonymous"></script>';
 
